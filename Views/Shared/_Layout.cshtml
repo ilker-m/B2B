@@ -1,0 +1,517 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - B2B</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- Optional: for icons -->
+    <link href="~/Content/product.css" rel="stylesheet" />
+
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+
+    <!-- Custom Styles -->
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' -25, 'opsz' 20
+        }
+
+        body {
+            background-color: #f5f5f5; /* Bej tonlarında arka plan */
+            font-family: 'Arial', sans-serif;
+        }
+
+        .navbar {
+            background-color: #282727; /* Bej rengi navbar */
+            border-bottom: 2px solid #1f19198c; /* Navbar altına hafif bir çizgi */
+            margin-bottom: 40px;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: #6c4f3d; /* Bej tonuyla uyumlu kahverengi */
+        }
+
+        .navbar-nav .nav-link {
+            color: #6c4f3d; /* Navbar linkleri kahverengi */
+        }
+
+            .navbar-nav .nav-link:hover {
+                color: #b49a6f; /* Hover efekti */
+            }
+
+        .container {
+            background-color: #fff; /* İçerik alanı beyaz arka plan */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        footer {
+            background-color: #f0e6d2;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+            footer .text-center {
+                color: #6c4f3d;
+            }
+
+        .btn-custom {
+            background-color: #b49a6f;
+            color: white;
+        }
+
+            .btn-custom:hover {
+                background-color: #6c4f3d;
+            }
+
+        /*.card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }*/
+        .card {
+            position: relative;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 1px solid rgba(0, 0, 0, .125);
+            border-radius: .25rem;
+            height: 450px; /* Sabit bir yükseklik belirleyin */
+        }
+
+        .card-body {
+            flex-grow: 1; /* İçerik alanının esnek olmasını sağlar */
+            overflow: hidden; /* Taşan metinleri gizler */
+            text-overflow: ellipsis; /* Taşan metinlere "..." ekler */
+            white-space: nowrap; /* Tek satırda tutar */
+        }
+
+
+        .card-title {
+            font-weight: inherit;
+        }
+
+        /*.card-body {
+            padding: 12px;
+        }*/
+
+        .filter-panel {
+            margin-top: 20px;
+        }
+
+        .product__info {
+            margin-top: 40px;
+        }
+
+
+
+        .image {
+            width: 50px; /* Resmin genişliğini belirler */
+            height: 50px; /* Resmin yüksekliğini belirler */
+            object-fit: cover; /* Resmin boyutlarıyla orantılı şekilde kesilmesini sağlar */
+            border-radius: 4px; /* Köşeleri yuvarlatır */
+        }
+
+        .list-group-item {
+            display: flex;
+            justify-content: space-between; /* Sol ve sağ grupları ayırır */
+            align-items: center; /* Dikeyde ortalar */
+        }
+
+            .list-group-item .code,
+            .list-group-item .name {
+                text-align: left; /* Sol tarafa hizalar */
+            }
+
+            .list-group-item .price,
+            .list-group-item .quantity {
+                text-align: right; /* Sağ tarafa hizalar */
+            }
+
+        .cart-controls {
+            display: flex;
+            gap: 0.5rem; /* Butonlar arasında boşluk */
+        }
+
+            .cart-controls span.quantity {
+                text-align: center; /* Miktarı ortalar */
+                min-width: 20px; /* Genişliği sabit tutar */
+            }
+
+        .price {
+            padding-right: 30px;
+        }
+        footer {
+            background-color: #f8f9fa;
+            color: #000;
+            padding: 20px 0;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .social-icons {
+            margin-bottom: 15px;
+        }
+
+        .social-icon {
+            display: inline-block;
+            margin: 0 15px;
+            width: 45px;
+            height: 45px;
+            line-height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+            .social-icon i {
+                vertical-align: middle;
+                color: white;
+                font-size: 20px;
+            }
+
+        .payment-icons i {
+            font-size: 36px;
+            margin: 0 10px;
+            color: #333;
+        }
+
+
+
+       
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="@Url.Action("Index","Home")">Store</a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a href="#" id="cart-icon" class="nav-link" data-toggle="modal" data-target="#cartModal">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span id="cart-count" class="badge badge-pill badge-danger">0</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartModalLabel">My Cart</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul id="cart" class="list-group mb-3">
+                        <!-- Cart items will be dynamically added here -->
+                    </ul>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <strong>Total Price:</strong>
+                        <span id="total-price">0 TL <i class="swap_horiz"></i></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="clear-cart">Clear Cart</button>
+                    <button type="button" class="btn btn-default" id="checkout">Complete Order</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        asdasd
+    </div>
+    <div class="">
+
+        @RenderBody()
+    </div>
+
+    <footer>
+        <div class="text-center p-3">
+            <div class="social-icons">
+                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+            </div>
+            <div class="payment-icons mt-3">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+            </div>
+            <div class="mt-3">
+                © 2024 B2B
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+    <script>
+        $(document).ready(function () {
+            loadProducts();
+            loadCartFromLocalStorage(); // Sayfa yenilendiğinde çerezden verileri yükle
+
+            // Arama butonuna tıklama olayı
+            $('#search-btn').on('click', function () {
+                const searchTerm = $('#search-box').val().trim();
+                loadProducts(searchTerm);
+            });
+
+            // Kullanıcı klavyede "Enter" tuşuna basarsa
+            $('#search-box').on('keypress', function (e) {
+                if (e.which === 13) { // Enter tuşu
+                    const searchTerm = $(this).val().trim();
+                    loadProducts(searchTerm);
+                }
+            });
+
+            // Product list loading
+            function loadProducts(search = "", category = "", minPrice = null, maxPrice = null) {
+                $('#loading').show();
+
+                $.ajax({
+                    url: '/Product/GetProducts',
+                    type: 'GET',
+                    data: { search: search, category: category, minPrice: minPrice, maxPrice: maxPrice },
+                    success: function (products) {
+                        let productHTML = '';
+                        products.forEach(product => {
+                            let description = product.Description;
+                            if (description.length > 40) {
+                                description = description.substring(0, 40) + "...";
+                            }
+
+                            productHTML += `
+                    <div class="col-md-3 mb-4">
+                        <div class="card">
+                            <a href="/Product/Details/${product.ProductCode}" style="text-decoration: none; color: inherit;">
+                                <img src="${product.ImageUrl}" class="card-img-top" alt="${product.ProductName}">
+                                <div class="card-body">
+                                    <h8 class="card-title">${product.ProductName}</h8>
+                                    <h8 class="card-title">${product.ProductCode}</h8>
+                                    <p><strong>Price:</strong> ${product.Price} €</p>
+                                </div>
+                            </a>
+                            <button class="btn btn-success add-to-cart" data-image="${product.ImageUrl}" data-code="${product.ProductCode}" data-name="${product.ProductName}" data-price="${product.Price}">Add to Cart</button>
+                        </div>
+                    </div>`;
+
+                        });
+                        $('#product-list').html(productHTML);
+                        $('#loading').hide();
+                    }
+                });
+            }
+
+            // Filtreleme butonuna tıklama olayı
+            $('#filter-btn').on('click', function () {
+                const search = $('#search-box').val().trim();
+                const category = $('#category-select').val();
+                const minPrice = $('#min-price').val();
+                const maxPrice = $('#max-price').val();
+
+                loadProducts(search, category, minPrice, maxPrice);
+            });
+
+
+
+            if ($('#product-list').length > 0) {
+                // Index sayfası için
+                $('#product-list').on('click', '.add-to-cart', function () {
+                    const productimage = $(this).data('image');
+                    const productCode = $(this).data('code');
+                    const productName = $(this).data('name');
+                    const productPrice = parseFloat($(this).data('price'));
+
+                    addCartItem(productimage, productCode, productName, productPrice);
+                    $('#cartModal').modal('show');
+                });
+            } else {
+                // Details sayfası için
+                $(document).on('click', '.add-to-cart', function () {
+                    const productimage = $(this).data('image');
+                    const productCode = $(this).data('code');
+                    const productName = $(this).data('name');
+                    const productPrice = parseFloat($(this).data('price'));
+
+                    addCartItem(productimage, productCode, productName, productPrice);
+                    $('#cartModal').modal('show');
+                });
+            }
+
+
+            // Add cart
+            function addCartItem(image, code, name, price, quantity = 1) {
+                // Sepette aynı code'a sahip bir ürün var mı kontrol et
+                const existingItem = $(`#cart li[data-code="${code}"]`);
+
+                if (existingItem.length) {
+                    // Eğer ürün zaten varsa miktarını artır
+                    let currentQuantity = parseInt(existingItem.find('.quantity').text());
+                    existingItem.find('.quantity').text(currentQuantity + quantity);
+                } else {
+                    // Ürün yoksa DOM'a yeni bir ürün ekle
+                    const cartItem = `
+                               <li class="list-group-item d-flex justify-content-between align-items-center"
+                                   data-code="${code}" data-price="${price}">
+
+                                   <div class="d-flex align-items-center">
+                                        <img src="${image}" alt="${name}" class="image" />
+                                        <div class="d-flex flex-column align-items-start ms-2">
+                                            <span class="code">${code}</span>
+                                            <span class="name">${name}</span>
+
+                                        </div>
+
+                                    </div>
+
+
+                                   <div class="d-flex flex-column align-items-end">
+
+                                       <div class="cart-controls">
+                                           <span class="price">${price}</span>
+                                           <button class="btn btn-sm btn-custom decrease-qty">−</button>
+                                           <span class="quantity">${quantity}</span>
+                                           <button class="btn btn-sm btn-custom increase-qty">+</button>
+                                           <button class="btn btn-sm btn-custom remove-from-cart">x</button>
+                                       </div>
+                                   </div>
+                               </li>`;
+                    $('#cart').append(cartItem);
+
+
+                }
+
+                saveCartToLocalStorage(); // Çerezlere kaydet
+                calculateTotalPrice();
+                updateCartCount();
+            }
+
+
+            function saveCartToLocalStorage() {
+                const cartItems = [];
+                $('#cart li').each(function () {
+
+                    const image = $(this).find('img').attr('src'); // Ürünün resim URL'sini al
+                    const code = $(this).data('code'); // Ürünün 'code' değeri
+                    const name = $(this).find('.name').text(); // Ürünün adı
+                    const price = parseFloat($(this).data('price')); // Ürün fiyatı
+                    const quantity = parseInt($(this).find('.quantity').text()); // Miktar
+                    cartItems.push({ image, code, name, price, quantity });
+                });
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            }
+
+
+            //yerel depodan ürünleri tekrar yükle
+            function loadCartFromLocalStorage() {
+                const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+                cartItems.forEach(item => {
+                    // Her ürünü tekrar eklerken code bazında kontrol sağlanır
+                    addCartItem(item.image, item.code, item.name, item.price, item.quantity);
+                });
+                calculateTotalPrice();
+                updateCartCount();
+            }
+
+
+            $('#cart').on('click', '.increase-qty', function () {
+                let quantity = parseInt($(this).siblings('.quantity').text());
+                $(this).siblings('.quantity').text(quantity + 1);
+                saveCartToLocalStorage();
+                calculateTotalPrice();
+            });
+
+            $('#cart').on('click', '.decrease-qty', function () {
+                let quantity = parseInt($(this).siblings('.quantity').text());
+                if (quantity > 1) {
+                    $(this).siblings('.quantity').text(quantity - 1);
+                } else {
+                    $(this).closest('li').remove(); // Ürün tamamen kaldırılır
+                }
+                saveCartToLocalStorage();
+                calculateTotalPrice();
+                updateCartCount();
+            });
+
+
+            // Remove item from cart
+            $('#cart').on('click', '.remove-from-cart', function () {
+                $(this).closest('li').fadeOut(300, function () {
+                    $(this).remove(); // Satırı DOM'dan kaldır
+                    calculateTotalPrice(); // Fiyatı güncelle
+                    updateCartCount(); // Sepet sayısını güncelle
+                });
+            });
+
+            // Calculate total price
+            function calculateTotalPrice() {
+                let total = 0;
+                $('#cart li').each(function () {
+                    const price = parseFloat($(this).data('price'));
+                    const quantity = parseInt($(this).find('.quantity').text());
+                    total += price * quantity;
+                });
+                $('#total-price').text(total.toFixed(2) + ' €');
+            }
+
+            // Update cart count
+            function updateCartCount() {
+                $('#cart-count').text($('#cart li').length);
+            }
+            // Clear cart
+
+            $('#clear-cart').click(function () {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Your cart will be cleared!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, clear it!',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#cart').empty(); // Sepeti DOM'dan temizle
+                        localStorage.removeItem('cartItems'); // Yerel depolamayı temizle
+                        $('#total-price').text('0 €');
+                        updateCartCount();
+                        $('#cartModal').modal('hide');
+                        Swal.fire('Cleared!', 'Your cart has been cleared.', 'success');
+                    }
+                });
+            });
+
+
+
+
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+﻿
+@media (max-width: 768px) { /* Tablet boyutu */
+    .card-title {
+        font-size: 11px;
+        font-weight:inherit;
+    }
+
+    .card-body {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) { /* Mobil boyutu */
+    .card-title {
+        font-size: 10px;
+    }
+
+    .card-body {
+        font-size: 11px;
+    }
+}
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 700px;
+        margin: 1.75rem auto;
+    }
+}
+
+
+body {
+}
+
+
+
+

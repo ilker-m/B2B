@@ -1,0 +1,545 @@
+﻿
+@{
+    ViewBag.Title = "Detay";
+    Layout = "~/Views/Shared/_LayoutAna.cshtml";
+}
+    @model dynamic
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+
+        .renk_asorti {
+            font-size: 15px;
+            text-align: center;
+            color: #ffffff;
+            margin: 11px;
+            font-weight: bold;
+        }
+
+            .renk_asorti:hover {
+                color: #000000;
+            }
+
+        .input-radio-color__item span {
+            padding-top: 3px;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .input-radio-color__item span {
+            border: 1px solid black;
+        }
+
+        .product-gallery_Alt {
+            display: block;
+            -webkit-box-shadow: 0 0 0 2px #f2f2f2 inset;
+            box-shadow: 0 0 0 2px #f2f2f2 inset;
+            padding: 12px;
+            border-radius: 2px;
+        }
+
+        .zoom {
+            display: inline-block;
+            position: relative;
+        }
+
+            /* magnifying glass icon */
+            .zoom:after {
+                content: '';
+                display: block;
+                width: 33px;
+                height: 33px;
+                position: absolute;
+                top: 0;
+                right: 0;
+                background: url(icon.png);
+            }
+
+            .zoom img {
+                display: block;
+            }
+
+                .zoom img::selection {
+                    background-color: transparent;
+                }
+
+            .zoom:hover {
+                cursor: pointer;
+            }
+
+        #ex2 img:hover {
+            cursor: url(grab.cur), default;
+        }
+
+        #ex2 img:active {
+            cursor: url(grabbed.cur), default;
+        }
+
+        .product-tabs__content {
+            padding: 25px 25px;
+        }
+
+        .product__share-links {
+            margin: 0;
+        }
+
+        .fa {
+            padding: 10px;
+            font-size: 15px;
+            /*width: 50px;*/
+            text-align: center;
+            text-decoration: none;
+            margin: 3px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+            .fa:hover {
+                cursor: pointer;
+                opacity: 0.7;
+                color: #fff;
+            }
+
+        .fa-facebook {
+            background: #3B5998;
+            color: white;
+        }
+
+        .fa-twitter {
+            background: #55ACEE;
+            color: white;
+        }
+
+        .fa-google {
+            background: #dd4b39;
+            color: white;
+        }
+
+        .fa-linkedin {
+            background: #007bb5;
+            color: white;
+        }
+
+        .fa-youtube {
+            background: #bb0000;
+            color: white;
+        }
+
+        .fa-instagram {
+            background: #125688;
+            color: white;
+        }
+    </style>
+
+
+    <div class="page-header">
+        <div class="page-header__container container">
+            <div class="page-header__breadcrumb">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+
+                        <li class="breadcrumb-item">
+                            <a href="@Url.Action("Index", "Home")">Ana Sayfa</a>
+                            <svg class="breadcrumb-arrow" width="6px" height="9px">
+                                <use xlink:href="~/Content/images/sprite.svg#arrow-rounded-right-6x9"></use>
+                            </svg>
+                        </li>
+
+                        <li class="breadcrumb-item">
+                            <a href="@Url.Action("Index", "Home")">Ürünler</a>
+                            <svg class="breadcrumb-arrow" width="6px" height="9px">
+                                <use xlink:href="~/Content/images/sprite.svg#arrow-rounded-right-6x9"></use>
+                            </svg>
+                        </li>
+
+                        <li class="breadcrumb-item active" aria-current="page">@Model.Product.ProductName</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="block">
+        <div class="container">
+            <div class="product product--layout--standard" data-layout="standard">
+                <div class="product__content">
+                    <!-- .product__gallery -->
+                    <div class="product__gallery">
+                        <div class="product-gallery">
+                            <div class="product-gallery__featured">
+                                <div class="owl-carousel" id="product-image">
+
+                                    @{
+
+
+                                        if (Model.Images != null)
+                                        {
+                                            foreach (var image in Model.Images)
+                                            {
+
+                                                if (image.IsMainImage)
+                                                {
+                                             
+
+                                                    <span class="zoom" id="ex1">
+                                                        <img src='@image.ImageUrl' class="anazoom" />
+                                                    </span>
+                                                }
+                                                else
+                                                {
+
+                                                }
+
+                                     
+
+                                            }
+                                        }
+
+
+                                    }
+
+
+
+                                </div>
+                            </div>
+                            <div class="product-gallery__carousel">
+                                <div class="owl-carousel" id="product-carousel">
+
+                                    @if (Model.Images != null)
+                                    {
+                                        foreach (var image in Model.Images)
+                                        {
+                                            if (image.IsMainImage == false)
+                                            {
+
+                                                <a href="" class="product-gallery_Alt">
+                                                    <img class="product-gallery__carousel-image" src="@image.ImageUrlL" alt="">
+                                                </a>
+                                            }
+                                            else
+                                            {
+
+                                            }
+
+
+                                        }
+                                    }
+
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- .product__gallery / end -->
+                    <!-- .product__info -->
+                    <div class="product__info">
+                        <div class="product__wishlist-compare">
+                            <button type="button" class="btn btn-sm btn-light btn-svg-icon" data-toggle="tooltip" data-placement="right" title="Wishlist">
+                                <svg width="16px" height="16px">
+                                    <use xlink:href="~/Content/images/sprite.svg#wishlist-16"></use>
+                                </svg>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-light btn-svg-icon" data-toggle="tooltip" data-placement="right" title="Compare">
+                                <svg width="16px" height="16px">
+                                    <use xlink:href="~/Content/images/sprite.svg#compare-16"></use>
+                                </svg>
+                            </button>
+                        </div>
+                        <h1 class="product__name">
+                            @Model.Product.ProductName
+                            <br />
+                            <span id="stokkod">@Model.Product.ProductCode</span>
+                        </h1>
+                        <div class="product__rating">
+
+
+                        </div>
+                        <div class="product__description">
+                            @Model.Product.Description
+
+                        </div>
+
+
+                        <li>Stok Kodu: @Model.Product.ProductCode</li>
+                        </ul>
+                    </div>
+
+                    <!-- .product__info / end -->
+
+                    <div class="product__sidebar">
+
+                        <div class="product__prices">
+
+                            @Model.Product.Price.ToString("#,##0.00")
+
+                        </div>
+                        <!-- .product__options -->
+                        <form class="product__options">
+                            <div class="form-group product__option">
+                                <label class="product__option-label">Asorti Renk ve Adet</label>
+                                <div class="input-radio-color">
+                            
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group product__option">
+
+                                <div class="product__actions">
+                                    <div class="product__actions-item">
+                                        <div class="input-number product__quantity">
+                                            <input readonly id="product-quantity" class="input-number__input form-control form-control-lg" u_adet="1" type="number" min="1" value="@Model.ASORTI_ADET">
+                                            <div class="input-number__add"></div>
+                                            <div class="input-number__sub"></div>
+                                        </div>
+                                    </div>
+                                    <div class="product__actions-item product__actions-item--addtocart">
+                                        <div class="btn btn-primary btn-lg" id="btn_add">Sepete Ekle</div>
+                                    </div>
+                                    <div class="product__actions-item product__actions-item--wishlist">
+
+                                    
+                                                <div style="float:right">
+                                                    <img width="116" src="~/Content/images/yerli.png" />
+                                                </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- .product__options / end -->
+                    </div>
+                    <!-- .product__end -->
+
+                    <div class="product__footer">
+
+                        <div class="share-links__list">
+
+                            @*<a  href="https://www.facebook.com/sharer/sharer.php?u=https://toptan.kitti.com.tr/Urunler/Detay/@Model.STOK_KODU" target="_blank" class="fa fa-facebook"></a>*@
+                            <a href="https://www.facebook.com/kittiaccessories" target="_blank" class="fa fa-facebook"></a>
+                            @*<a href="https://twitter.com/intent/tweet?url=%3A%2F%2Fwww.kitti.com.tr&text=@Model.STOK_ADI--->https://toptan.kitti.com.tr/Urunler/Detay/@Model.STOK_KODU&original_referer=" target="_blank" class="fa fa-twitter"></a>*@
+                            <a href="https://www.instagram.com/kitti_accessories/" target="_blank" class="fa fa-instagram"></a>
+                            <a href="https://www.youtube.com/channel/UC9jAZXLFeKzLuQnyvPhtdXQ" target="_blank" class="fa fa-youtube"></a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="product-tabs ">
+                <div class="product-tabs__list">
+                    <a href="#tab-description" class="product-tabs__item product-tabs__item--active">Özellikler</a>
+                    <a href="#tab-specification" class="product-tabs__item">Açıklama</a>
+
+                </div>
+                <div class="product-tabs__content">
+                    <div class="product-tabs__pane product-tabs__pane--active" id="tab-description">
+                        <div class="spec">
+                            <div class="spec__section">
+                                <div class="spec__row">
+                                    <div class="spec__name">Marka</div>
+                                    <div class="spec__value">@Model.Product.CategoryId</div>
+                                </div>
+                                <div class="spec__row">
+                                    <div class="spec__name">Cinsiyet</div>
+                                    <div class="spec__value">@Model.Product.CategoryId</div>
+                                </div>
+
+                                <div class="spec__row">
+                                    <div class="spec__name">Mevsim</div>
+                                    <div class="spec__value">@Model.Product.CategoryId</div>
+                                </div>
+                                <div class="spec__row">
+                                    <div class="spec__name">Kategori</div>
+                                    <div class="spec__value">@Model.Product.CategoryId</div>
+                                </div>
+        
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="product-tabs__pane" id="tab-specification">
+
+
+                        <div class="typography">
+
+                            <p>
+                                Güvenlikli ve kaliteli üretim konusunda titiz bir yaklaşım gösteren markalarımız, ürün satışının gerçekleştiği tüm ülkelerdeki kanun ve yönetmelikleri yakından takip eder.
+
+                            </p>
+                            <p>
+                                Moda akımlarını yakalayan, fonksiyonel ve şık ürün yelpazesi düzenli olarak yenilenir. Böylece mağazalardaki fiziksel görünürlüğü korunur.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="modal_adet" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Sepete Ekleme Başarısız!
+                </div>
+                <div class="modal-body">
+                    <div class="row text-center">
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-8">
+
+                            <p>Alabileceğiniz Maksimum Adet</p>
+                            <br />
+                            <span style="font-weight:bold" id="maxadet"></span>
+
+                        </div>
+                        <div class="col-md-2">
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+
+    //$(".zoom_08").elevateZoom({
+    //    zoomWindowFadeIn: 500,
+    //    zoomWindowFadeOut: 500,
+    //    lensFadeIn: 500,
+    //    lensFadeOut: 500
+    //});
+    $(document).ready(function () {
+        $('#ex1').zoom();
+
+    });
+
+    $('.product-gallery_Alt').click(function () {
+
+        var imgx = $(this).children("img").attr("src");
+
+
+        $('.zoomWindowContainer div').css("background-image", "url('" + imgx + "')");
+
+
+        $('.anazoom').attr("src", imgx);
+
+        $('#ex1').zoom();
+        //$('a.photo').zoom({ url: imgx });
+
+        $('.product-gallery_Alt').css('box-shadow', '0px 0px 0px 2px #f2f2f2 inset');
+
+
+        $(this).css('box-shadow', '0px 0px 0px 2px #cc3333 inset');
+    });
+
+
+
+    $('.input-number__add').click(function () {
+
+        var value = $('.input-number__input').val();
+        var asortix = 6;
+
+
+
+        var sayi1 = Number(value);
+        var sayi2 = Number(asortix);
+        var toplam = sayi1 + sayi2;
+
+        $('.input-number__input').val(toplam)
+
+    });
+    $('.input-number__sub').click(function () {
+
+        var value = $('.input-number__input').val();
+        var asortix = 6;
+
+
+
+        var sayi1 = Number(value);
+        var sayi2 = Number(asortix);
+        var toplam = sayi1 - sayi2;
+        if (toplam < 6)
+            toplam = 6;
+
+        $('.input-number__input').val(toplam)
+
+    });
+    $('#btn_add').click(function () {
+
+        var adet = $(this).attr('adet');
+
+
+        $.ajax({
+            url: '@Url.Action("Ekle", "Sepet")',
+            type: 'POST',
+            dataType: "json",
+            contentType: 'application/json',
+
+            data: "{'stok_kodu':'" + document.getElementById("stokkod").innerHTML + "','adet':'" + $("#product-quantity").val() + "'}",
+            success: function (data) {
+
+                var sayı = 0;
+                if (data != "") {
+
+
+                    $('.dropcart__product').remove();
+                    $('.toplam').remove();
+                    $('.dropcart__products-list').prepend(data);
+                }
+                $(".dropcart__product").each(function () {
+                    sayı++;
+                });
+                $('#kartsayi').text(sayı);
+            },
+            error: function (data) {
+                alert("Hata:sipariş")
+            }
+        });
+
+        /////////////////////////////////////
+        $.ajax({
+            url: '@Url.Action("AdetKontrol", "Sepet")',
+            type: 'POST',
+            dataType: "json",
+            contentType: 'application/json',
+
+            data: "{'stok_kodu':'" + document.getElementById("stokkod").innerHTML + "','adet':'" + $("#product-quantity").val() + "'}",
+            success: function (data) {
+
+
+                var kontrol = $.parseJSON(data);
+
+                if (kontrol.Parametre == 0) {
+
+                    $("#modal_adet").modal('show');
+                    $('#maxadet').text(kontrol.Adet);
+
+                }
+                else {
+                    $("#modal_adet").modal('hide');
+                }
+            },
+            error: function (data) {
+                alert("Hata:sipariş-adet")
+            }
+        });
+    });
+    </script>
+    <!-- .block-products-carousel -->

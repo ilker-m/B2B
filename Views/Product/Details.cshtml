@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "Detay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model dynamic
+
+<div class="container">
+    <div class="row">
+        <!-- Ürün Galerisi -->
+        <div class="col-md-8 product__gallery">
+            <div class="product-gallery__featured">
+                @if (Model.Images != null)
+                {
+                    foreach (var image in Model.Images)
+                    {
+                        if (image.IsMainImage == true)
+                        {
+                            <img id="main-image" src="@image.ImageUrl" alt="Ana Resim" class="img-fluid">
+                        }
+                    }
+                }
+            </div>
+            <div class="product-gallery__carousel mt-3 d-flex">
+                @if (Model.Images != null)
+                {
+                    foreach (var image in Model.Images)
+                    {
+                        if (image.IsMainImage == false)
+                        {
+                            <img class="thumbnail mx-1" src="@image.ImageUrl" alt="Alt Resim" onclick="changeImage(this.src)" style="cursor: pointer; width: 60px; height: 60px; object-fit: cover;">
+                        }
+                    }
+                }
+            </div>
+        </div>
+
+        <!-- Sağ Taraf: Ürün Bilgileri -->
+        <div class="col-md-4 product__info">
+            <h1 class="product__name">@Model.Product.ProductName</h1>
+            <p class="product__description">@Model.Product.Description</p>
+            <p><strong>Stok Kodu:</strong> @Model.Product.ProductCode</p>
+
+            <button class="btn btn-success add-to-cart" data-code="@Model.Product.ProductCode" data-name="@Model.Product.ProductName" data-price="@Model.Product.Price">Add to Cart</button>
+        </div>
+    </div>
+</div>
+
+<!-- Footer Sorununu Çözmek İçin Boş Alan -->
+<div class="mt-5"></div>
+
+
+
+
+<style>
+    /* Loading spinner */
+    #loading {
+        margin: 20px 0;
+    }
+
+    .cart-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px; /* Butonlar arası boşluk */
+    }
+
+    .btn-custom {
+        background-color: #ffffff; /* Buton arka plan rengi */
+        color: #000000;
+        border: 1px solid #cccccc;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+        .btn-custom:hover {
+            background-color: #ffffff;
+            border-color: #b5b5b5;
+            transform: scale(1.1);
+        }
+
+    .remove-from-cart {
+        margin-left: 10px;
+    }
+
+    .btn-default {
+        border: 1px solid #cccccc;
+    }
+
+        .btn-default:hover {
+            transition: all 0.3s ease;
+            background-color: #ffffff;
+            border-color: #b5b5b5;
+            transform: scale(1.05);
+        }
+
+    .modal-header {
+    }
+</style>
